@@ -36,11 +36,10 @@ export default function FilterPanel() {
     toggleConservationStatus,
     setSortBy,
     clearAllFilters,
-    activeFilterCount,
   } = useFilterStore();
 
   const [localQuery, setLocalQuery] = useState(filters.searchQuery);
-  const debounceRef = useRef<ReturnType<typeof setTimeout>>();
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   const handleQueryChange = useCallback(
     (value: string) => {
@@ -62,7 +61,7 @@ export default function FilterPanel() {
     setLocalQuery(filters.searchQuery);
   }, [filters.searchQuery]);
 
-  const count = activeFilterCount();
+  const count = useFilterStore.getState().activeFilterCount();
 
   return (
     <div className="space-y-4">

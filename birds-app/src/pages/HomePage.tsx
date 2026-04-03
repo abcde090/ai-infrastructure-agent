@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend, type PieLabelRenderProps } from 'recharts';
 import { useBirdStore } from '../stores/useBirdStore';
 import { CONSERVATION_LABELS, CONSERVATION_COLORS } from '../lib/constants';
 import type { ConservationStatus } from '../types/bird';
@@ -143,8 +143,8 @@ export default function HomePage() {
                     outerRadius={100}
                     dataKey="value"
                     nameKey="name"
-                    label={({ name, percent }) =>
-                      `${name} ${(percent * 100).toFixed(0)}%`
+                    label={(props: PieLabelRenderProps) =>
+                      `${props.name ?? ''} ${(((props.percent as number) ?? 0) * 100).toFixed(0)}%`
                     }
                   >
                     {pieData.map((entry, i) => (

@@ -7,15 +7,15 @@ interface Props {
 
 export default function AnimatedCounter({ value, label }: Props) {
   const [display, setDisplay] = useState(0);
-  const rafRef = useRef<number>();
-  const startRef = useRef<number>();
+  const rafRef = useRef<number>(0);
+  const startRef = useRef<number>(0);
 
   useEffect(() => {
     const duration = 1500;
-    startRef.current = undefined;
+    startRef.current = 0;
 
     const animate = (timestamp: number) => {
-      if (startRef.current === undefined) {
+      if (startRef.current === 0) {
         startRef.current = timestamp;
       }
       const elapsed = timestamp - startRef.current;
